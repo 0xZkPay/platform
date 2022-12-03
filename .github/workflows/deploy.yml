@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-    - name: Setup Docker Buildx
-      run: docker/setup-buildx-action@v1
+    - name: Checkout
+      uses: actions/checkout@v2
       
     - name: Login to DockerHub
       uses: docker/login-action@v1
@@ -26,5 +26,7 @@ jobs:
       id: docker_build
       uses: docker/build-push-action@v2
       with:
-         push: true
-         tags: shachindra/zkpay-platform:latest
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: shachindra/zkpay-platform:latest
